@@ -36,7 +36,7 @@ func getFileContent(w http.ResponseWriter, r *http.Request, params httprouter.Pa
 	fmt.Fprintf(w, getCommandOutput("bin/cat", params.ByName("name")))
 }
 
-func main() {
+func main5() {
 	router := httprouter.New()
 
 	router.GET("/api/v1/go-version", goVersion)
