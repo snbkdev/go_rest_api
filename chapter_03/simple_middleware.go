@@ -18,7 +18,7 @@ func mainLogic(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("OK"))
 }
 
-func main() {
+func main4() {
 	mainLogicHandler := http.HandlerFunc(mainLogic)
 	http.Handle("/", middleware(mainLogicHandler))
 	http.ListenAndServe(":8000", nil)
