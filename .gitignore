@@ -158,3 +158,5 @@ dist
 
 # SvelteKit build / generate output
 .svelte-kit
+
+info.txt
