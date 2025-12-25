@@ -160,3 +160,4 @@ dist
 .svelte-kit
 
 info.txt
+*.db
