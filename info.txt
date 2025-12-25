@@ -6,3 +6,9 @@ go get github.com/gorilla/handlers
 
 JSON RPC 
 go get github.com/gorilla/rpc
+
+Установка go-restful
+go get github.com/emicklei/go-restful
+
+Пакет для работы с sqlite3
+go get github.com/mattn/go-sqlite3
