@@ -1,19 +1,20 @@
 package main
 
 import (
-    "context"
-    "encoding/json"
-    "log"
-    "net/http"
-    "os"
-    "time"
+	"context"
+	"encoding/json"
+	"io"
+	"log"
+	"net/http"
+	"os"
+	"time"
 
-    "github.com/gorilla/mux"
-    "github.com/joho/godotenv"
-    "go.mongodb.org/mongo-driver/bson"
-    "go.mongodb.org/mongo-driver/bson/primitive"
-    "go.mongodb.org/mongo-driver/mongo"
-    "go.mongodb.org/mongo-driver/mongo/options"
+	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type BoxOffice struct {
@@ -159,6 +160,45 @@ func (db *DB) GetAllMovies(w http.ResponseWriter, r *http.Request) {
     writeJSONResponse(w, movies, http.StatusOK)
 }
 
+func (db *DB) UpdateMovie(w http.ResponseWriter, r *http.Request) {
+    vars := mux.Vars(r)
+    id := vars["id"]
+    
+    objectID, err := primitive.ObjectIDFromHex(id)
+    if err != nil {
+        http.Error(w, "Invalid ID format", http.StatusBadRequest)
+        return
+    }
+    
+    body, _ := io.ReadAll(r.Body)
+    var movie Movie
+    if err := json.Unmarshal(body, &movie); err != nil {
+        http.Error(w, "Invalid JSON", http.StatusBadRequest)
+        return
+    }
+    
+    ctx, cancel := context.WithTimeout(r.Context(), 5*time.Second)
+    defer cancel()
+    
+    filter := bson.M{"_id": objectID}
+    update := bson.M{"$set": movie}
+    
+    result, err := db.collection.UpdateOne(ctx, filter, update)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+    
+    if result.MatchedCount == 0 {
+        http.Error(w, "Movie not found", http.StatusNotFound)
+        return
+    }
+    
+    w.Header().Set("Content-Type", "text/plain")
+    w.WriteHeader(http.StatusOK)
+    w.Write([]byte("Updated successfully!!!"))
+}
+
 func (db *DB) DeleteMovie(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     id := vars["id"]
@@ -205,6 +245,7 @@ func main() {
     api.HandleFunc("/movies/{id}", db.GetMovie).Methods("GET")
     api.HandleFunc("/movies", db.PostMovie).Methods("POST")
     api.HandleFunc("/movies/{id}", db.DeleteMovie).Methods("DELETE")
+	api.HandleFunc("/movies/{id:[a-zA-Z0-9]*}", db.UpdateMovie).Methods("PUT")
 
     r.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
         writeJSONResponse(w, map[string]string{"status": "healthy"}, http.StatusOK)
