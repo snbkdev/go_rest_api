@@ -1,0 +1,20 @@
+
+syntax = "proto3";
+
+package transaction;
+
+option go_package = "grpc_example/generated";
+
+service MoneyTransaction {
+  rpc MakeTransaction(TransactionRequest) returns (TransactionResponse);
+}
+
+message TransactionRequest {
+  float amount = 1;
+  string from = 2;
+  string to = 3;
+}
+
+message TransactionResponse {
+  bool confirmation = 1;
+}
