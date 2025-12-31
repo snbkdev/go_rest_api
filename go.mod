@@ -8,24 +8,22 @@ require (
 	github.com/gorilla/handlers v1.5.2
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/rpc v1.2.1
+	github.com/jinzhu/gorm v1.9.16
 	github.com/joho/godotenv v1.5.1
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/justinas/alice v1.2.0
+	github.com/levigross/grequests/v2 v2.0.0-20250606223341-05add15eea25
+	github.com/lib/pq v1.10.9
 	github.com/mattn/go-sqlite3 v1.14.32
+	github.com/urfave/cli v1.22.17
 	go.mongodb.org/mongo-driver v1.17.6
 )
 
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.7 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-querystring v1.2.0 // indirect
-	github.com/jinzhu/gorm v1.9.16 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
-	github.com/levigross/grequests v0.0.0-20250606031859-3f3c12e4e704 // indirect
-	github.com/lib/pq v1.10.9 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
-	github.com/urfave/cli v1.22.17 // indirect
-	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013 // indirect
 )
 
 require (
@@ -67,6 +65,5 @@ require (
 	golang.org/x/sys v0.39.0 // indirect
 	golang.org/x/text v0.32.0 // indirect
 	golang.org/x/tools v0.39.0 // indirect
-	google.golang.org/grpc v1.50.0
 	google.golang.org/protobuf v1.36.9
 )
