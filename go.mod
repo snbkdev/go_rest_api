@@ -5,6 +5,7 @@ go 1.25.3
 require (
 	github.com/emicklei/go-restful v2.16.0+incompatible
 	github.com/gin-gonic/gin v1.11.0
+	github.com/go-kit/kit v0.13.0
 	github.com/gorilla/handlers v1.5.2
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/rpc v1.2.1
@@ -16,20 +17,16 @@ require (
 	github.com/lib/pq v1.10.9
 	github.com/mattn/go-sqlite3 v1.14.32
 	github.com/urfave/cli v1.22.17
-	github.com/urfave/cli/v2 v2.27.7
 	go.mongodb.org/mongo-driver v1.17.6
 )
 
 require (
-	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.7 // indirect
-	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/go-kit/kit v0.13.0 // indirect
+	github.com/go-kit/log v0.2.0 // indirect
+	github.com/go-logfmt/logfmt v0.5.1 // indirect
 	github.com/google/go-querystring v1.2.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
-	github.com/redis/go-redis/v9 v9.17.2 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
-	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
 )
 
 require (
